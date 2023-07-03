@@ -2,8 +2,11 @@ const fs = require('fs');
 const axios = require('axios');
 const path = require('path');
 
-const downloadFile = async (url, id, res)=>{
-  const folderPath = `./download/${id}`;
+const downloadFile = async (url, id, res, author)=>{
+    if(author){
+        author = author+"/"
+    }
+  const folderPath = `./download/${author?author:""}${id}`;
   const filePath = path.join(folderPath, `${res}.mp4`);
 
   // 创建目标文件夹

@@ -1,5 +1,5 @@
 const readline = require('readline');
-const simulateBrowser = require("./browser.js")
+const iwara = require("./browser.js")
 const downloadFile = require('./download');
 // 创建 readline 接口实例
 const rl = readline.createInterface({
@@ -17,7 +17,7 @@ rl.question('请输入下载地址：', (downloadUrl) => {
   if (match) {
     const id = match[1];
     console.log(`提取的 ID 为：${id}`);
-    simulateBrowser(downloadUrl).then(response=>{
+    iwara.simulateBrowser(downloadUrl).then(response=>{
         let resolution = []
         response = JSON.parse(response)
         //console.log(typeof(response))
