@@ -112,9 +112,56 @@ const getUserVideosLink = async (url) => {
   await browser.close();
 };
 
+
+
+const getAllVideo = async (url) => {
+  const browser = await puppeteer.launch({
+      headless: 'new', 
+      args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+  })
+
+  const page = await browser.newPage();
+
+  //const cookie = '_ga=GA1.2.625096767.1677324435; _ga_PK7DE1RR8V=GS1.1.1677336011.4.1.1677340420.0.0.0; _pk_id.1.602d=24ecf42c9d82b2b8.1687684164.; _gid=GA1.2.721396868.1688346987; _pk_ses.1.602d=1; _gat_gtag_UA_37410039_11=1';
+  
+  await page.goto(url);
+  //await page.setCookie(...parseCookies(cookie));
+  //await page.waitForTimeout(5000);
+    await page.waitForSelector('.page-post__body');
+    await page.waitForTimeout(5000);
+    // 获取 class="page-post__body" 元素的 HTML 内容
+  const htmlContent = await page.$eval('.page-post__body', element => element.innerHTML);
+    
+    console.log(htmlContent)
+    
+  // 使用正则表达式匹配链接
+  const videoIDRegex = /\/video\/([^"'\s]+)/g;
+  const videoIDs = [];
+  let match;
+
+  while ((match = videoIDRegex.exec(htmlContent)) !== null) {
+    const videoID = match[1];
+    videoIDs.push(videoID);
+  }
+
+  return videoIDs
+  
+  
+  
+  // 等待页面加载完成（可以根据需要调整等待时间）
+  
+
+  //const dropdownContent = await page.$eval('.page-video__bottom', element => element.innerHTML);
+  //console.log(dropdownContent);
+
+  await browser.close();
+};
+
+
 iwara = {
     simulateBrowser,
-    getUserVideosLink
+    getUserVideosLink,
+    getAllVideo
 }
 /*
 simulateBrowser("https://www.iwara.tv/video/G3X3J7CgiTS7VK")
