@@ -12,3 +12,8 @@ author: [Wobbay](https://www.wobbay.xyz/wb10594)
 1. Run `npm install` to install the required dependencies.
 2. Run `node single.js` to execute the script.
 3. Input user page link LIKE `https://www.iwara.tv/profile/UserID`
+
+## Download videos in post
+1. Run `npm install` to install the required dependencies.
+2. Run `node posts.js` to execute the script.
+3. Input user page link LIKE `https://www.iwara.tv/post/ID`
